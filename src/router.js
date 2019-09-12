@@ -2,7 +2,9 @@
 
 import Vue from "vue";
 import Router from "vue-router";
+
 import Home from "./views/Home.vue";
+import Login from "./views/Auth/Login";
 
 Vue.use(Router);
 
@@ -10,16 +12,36 @@ let router = new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [{
-        path: "/",
-        component: {
-            render: h => h("router-view")
+            path: "/login",
+            name: "login",
+            component: Login
         },
-        children: [{
+        {
             path: "/",
-            name: "home",
-            component: Home
-        }]
-    }]
+            component: {
+                render: h => h("router-view")
+            },
+            children: [{
+                path: "/",
+                name: "home",
+                component: Home
+            }]
+        }
+    ]
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.isAuthenticated) {
+            return next({
+                path: "/",
+                params: {
+                    nextUrl: to.fullPath
+                }
+            });
+        }
+    }
+    return next();
 });
 
 export default router;

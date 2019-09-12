@@ -1,14 +1,14 @@
 <template>
   <v-card>
     <v-navigation-drawer app width="350px" permanent>
-      <v-list-item link>
+      <v-list-item link to="/">
         <v-list-item-content>
-          <v-list-item-title class="c-logo display-3" to="/">FOXS</v-list-item-title>
+          <v-list-item-title class="c-logo display-3">FOXS</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
       <v-list dense nav class="c-menu">
-        <v-list-item link>
+        <v-list-item link to="/">
           <v-list-item-content>
             <v-list-item-title class="c-text text-uppercase d-flex justify-end">trang chủ</v-list-item-title>
           </v-list-item-content>
@@ -31,11 +31,14 @@
         </span>
       </div>
 
-      <v-list-item link class="c-btn-login">
-        <v-list-item-content>
-          <v-list-item-title class="c-text text-uppercase d-flex justify-center" to="/">login</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block>
+            <router-link to="/login" v-if="!isAuthenticated" class="c-text-auth">Login</router-link>
+            <a href="#" v-if="isAuthenticated" @click="logout" class="c-text-auth">Logout</a>
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
   </v-card>
 </template>
@@ -44,6 +47,18 @@
 export default {
   props: {
     categories: {}
+  },
+
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
+
+  methods: {
+    logout() {
+      this.$store.dispatch("logout").then(() => this.$router.push("/login"));
+    }
   }
 };
 </script>
@@ -75,7 +90,8 @@ export default {
 .c-author {
   color: red;
 }
-.c-btn-login {
-  margin-top: 40px;
+.c-text-auth {
+  text-decoration: none;
+  color: black !important;
 }
 </style>
