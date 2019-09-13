@@ -55,7 +55,9 @@ export default {
   methods: {
     getCategories() {
       axios.get("/object-types").then(response => {
-        this.categories = response.data.object_types;
+        this.categories = response.data.object_types.filter(
+          item=> item.slug !== "authors"
+        );
         console.log(this.categories);
       });
     },
