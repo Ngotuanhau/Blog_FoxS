@@ -5,6 +5,7 @@ import Router from "vue-router";
 
 import Home from "./views/Home.vue";
 import Login from "./views/Auth/Login";
+import Pages from "./views/Pages/ContainerPages";
 
 Vue.use(Router);
 
@@ -22,10 +23,16 @@ let router = new Router({
                 render: h => h("router-view")
             },
             children: [{
-                path: "/",
-                name: "home",
-                component: Home
-            }]
+                    path: "/",
+                    name: "home",
+                    component: Home
+                },
+                {
+                    path: "/pages/:slug",
+                    name: "pages",
+                    component: Pages
+                }
+            ]
         }
     ]
 });

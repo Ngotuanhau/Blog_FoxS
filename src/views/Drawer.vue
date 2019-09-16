@@ -13,7 +13,12 @@
             <v-list-item-title class="c-text text-uppercase d-flex justify-end">trang chủ</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-for="(item, index) in categories" :key="index" link>
+        <v-list-item
+          v-for="(item, index) in categories"
+          :key="index"
+          link
+          :to="{name:'pages', params:{slug:item.slug}}"
+        >
           <v-list-item-content>
             <v-list-item-title class="c-text text-uppercase d-flex justify-end">{{item.title}}</v-list-item-title>
           </v-list-item-content>
