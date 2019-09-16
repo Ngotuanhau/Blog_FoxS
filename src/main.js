@@ -8,7 +8,9 @@ import "./registerServiceWorker";
 import vuetify from "./plugins/vuetify";
 import axios from "./plugins/axios";
 import "./vee-validate";
+import VueMoment from "vue-moment";
 
+Vue.use(VueMoment);
 Vue.use(axios);
 
 Vue.config.productionTip = false;
