@@ -3,13 +3,13 @@
     <v-layout v-for="(item, index) in pages" :key="index" pa-2>
       <v-card class="c-card">
         <v-flex md6>
-          <router-link :to="'/object/'+ item.slug">
+          <router-link :to="'/page/'+ item.slug">
             <v-img :src="item.metadata.image.url" aspect-ratio="1.75"></v-img>
           </router-link>
         </v-flex>
         <v-flex md6>
           <v-card-title class="c-card-title">
-            <router-link :to="'/object/'+ item.slug" class="c-card-text">{{item.title}}</router-link>
+            <router-link :to="'/page/'+ item.slug" class="c-card-text">{{item.title}}</router-link>
             <span class="c-text-date">{{item.created_at | moment("calendar") }}</span>
             <span v-html="item.metadata.description" class="c-text-descrip"></span>
           </v-card-title>

@@ -13,7 +13,7 @@
             class="pa-2"
           >
             <v-card width="100%" class="c-card">
-              <router-link :to="'/object/'+ item.slug">
+              <router-link :to="'/page/'+ item.slug">
                 <v-img :src="item.metadata.image.url" alt="hinhanh" height="300" class="c-img">
                   <v-card-title class="c-title-post">
                     <span class="overline c-text-post">{{item.title}}</span>
