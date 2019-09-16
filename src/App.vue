@@ -19,6 +19,7 @@
           <v-btn text dark @click.native="snackbar = false">Close</v-btn>
         </v-snackbar>
         <router-view></router-view>
+        <go-top :size="40" :bottom="90" bg-color="brown" :has-outline="false" :max-width="320"></go-top>
       </v-container>
     </v-content>
   </v-app>
@@ -27,12 +28,14 @@
 <script>
 import NavigationDrawer from "./views/Drawer";
 import Snackbar from "./components/Snackbar/Snackbar";
+import GoTop from "@inotom/vue-go-top";
 
 export default {
   name: "App",
   components: {
     vNavigationDrawer: NavigationDrawer,
-    Snackbar
+    Snackbar,
+    GoTop
   },
 
   data() {
@@ -56,7 +59,7 @@ export default {
     getCategories() {
       axios.get("/object-types").then(response => {
         this.categories = response.data.object_types.filter(
-          item=> item.slug !== "authors"
+          item => item.slug !== "authors"
         );
         console.log(this.categories);
       });
