@@ -14,7 +14,7 @@
             <span v-html="item.metadata.description" class="c-text-descrip"></span>
           </v-card-title>
           <v-card-actions>
-            <v-btn text class="c-btn-read">
+            <v-btn text class="c-btn-read" :to="'/page/'+ item.slug">
               <span>read more</span>
             </v-btn>
           </v-card-actions>
