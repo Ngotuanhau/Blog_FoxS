@@ -6,6 +6,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Auth/Login";
 import Pages from "./views/Pages/ContainerPages";
+import Page from "./views/Page/ContainerPage";
 
 Vue.use(Router);
 
@@ -31,6 +32,11 @@ let router = new Router({
                     path: "/pages/:slug",
                     name: "pages",
                     component: Pages
+                },
+                {
+                    path: "/page/:slug",
+                    name: "page",
+                    component: Page
                 }
             ]
         }
