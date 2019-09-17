@@ -18,7 +18,9 @@
           {{message}}
           <v-btn text dark @click.native="snackbar = false">Close</v-btn>
         </v-snackbar>
-        <router-view></router-view>
+        <transition name="router-animate">
+          <router-view></router-view>
+        </transition>
         <go-top :size="40" :bottom="90" bg-color="brown" :has-outline="false" :max-width="320"></go-top>
       </v-container>
     </v-content>
@@ -96,5 +98,36 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.router-animate-enter-active {
+  animation: coming 1s;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.router-animate-leave-active {
+  animation: going 1s;
+}
+
+@keyframes going {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
+
+@keyframes coming {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }
 </style>
