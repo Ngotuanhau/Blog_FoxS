@@ -3,7 +3,14 @@
     <v-navigation-drawer app width="350px" permanent>
       <v-list-item link to="/">
         <v-list-item-content>
-          <v-list-item-title class="c-logo display-3">FOXS</v-list-item-title>
+          <v-list-item-title class="c-logo display-3">
+            <div class="first">
+              <span>FO</span>
+            </div>
+            <div class="second">
+              <span>XS</span>
+            </div>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -49,6 +56,8 @@
 </template>
 
 <script>
+import anime from "animejs";
+
 export default {
   props: {
     categories: {}
@@ -60,7 +69,28 @@ export default {
     }
   },
 
+  mounted() {
+    this.animateLogo();
+  },
+
   methods: {
+    animateLogo() {
+      anime({
+        targets: ".first ",
+        translateX: [-400, 0],
+        duration: 1500,
+        delay: 800,
+        easing: "linear"
+      });
+      anime({
+        targets: ".second",
+        translateX: [-400, 0],
+        duration: 1000,
+        delay: 800,
+        easing: "linear"
+      });
+    },
+
     logout() {
       this.$store.dispatch("logout").then(() => this.$router.push("/login"));
     }
@@ -71,6 +101,8 @@ export default {
 <style>
 .c-logo {
   font-weight: 700 !important;
+  display: flex;
+  justify-content: center;
 }
 .c-menu {
   margin-top: 30px;
