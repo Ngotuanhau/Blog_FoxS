@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-navigation-drawer :categories="categories"></v-navigation-drawer>
+    <v-navigation-drawer :categories="categories" v-model="drawer"></v-navigation-drawer>
+    <v-app-bar @toogle="drawer=!drawer" v-if="$vuetify.breakpoint.xs"></v-app-bar>
     <v-content>
       <v-container fluid>
         <Snackbar />
@@ -29,6 +30,7 @@
 
 <script>
 import NavigationDrawer from "./views/Drawer";
+import AppBar from "./views/Toolbar";
 import Snackbar from "./components/Snackbar/Snackbar";
 import GoTop from "@inotom/vue-go-top";
 
@@ -36,6 +38,7 @@ export default {
   name: "App",
   components: {
     vNavigationDrawer: NavigationDrawer,
+    vAppBar: AppBar,
     Snackbar,
     GoTop
   },
@@ -49,7 +52,8 @@ export default {
       y: null,
       x: null,
       mode: null,
-      categories: []
+      categories: [],
+      drawer: null
     };
   },
 

@@ -1,6 +1,12 @@
 <template>
   <v-card>
-    <v-navigation-drawer app width="350px" permanent>
+    <v-navigation-drawer
+      app
+      width="300px"
+      :value="value"
+      @input="$emit('input', $event)"
+      mobile-break-point="601"
+    >
       <v-list-item link to="/">
         <v-list-item-content>
           <v-list-item-title class="c-logo display-3">
@@ -60,7 +66,8 @@ import anime from "animejs";
 
 export default {
   props: {
-    categories: {}
+    categories: {},
+    value: false
   },
 
   computed: {
