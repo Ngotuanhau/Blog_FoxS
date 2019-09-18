@@ -2,7 +2,10 @@
   <v-container>
     <v-layout>
       <v-flex class="c-form-login" xs6 md6 offset-md3 offset-xs3 pa-5>
-        <div class="c-text-header display-2 mb-8">My Account</div>
+        <div class="c-text-header display-2 mb-8">
+          <span class="first">My</span>
+          <span class="second">Accound</span>
+        </div>
         <ValidationObserver ref="observer">
           <v-form slot-scope="{ invalid, validated }">
             <VTextFieldWithValidation rules="required|email" v-model="email" label="E-mail" />
@@ -53,6 +56,7 @@
 <script>
 import { ValidationObserver } from "vee-validate";
 import VTextFieldWithValidation from "../../components/input/VTextFieldWithValidation";
+import anime from "animejs";
 
 export default {
   components: {
@@ -68,7 +72,28 @@ export default {
     };
   },
 
+  mounted() {
+    this.animate();
+  },
+
   methods: {
+    animate() {
+      anime({
+        targets: ".first",
+        translateX: [-200, 0],
+        duration: 1000,
+        delay: 800,
+        easing: "linear"
+      });
+      anime({
+        targets: ".second",
+        translateY: [-200, 0],
+        duration: 500,
+        delay: 800,
+        easing: "linear"
+      });
+    },
+
     submit() {
       const user = {
         email: this.email,
