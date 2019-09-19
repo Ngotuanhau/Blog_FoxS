@@ -5,7 +5,7 @@
       width="300px"
       :value="value"
       @input="$emit('input', $event)"
-      mobile-break-point="601"
+      mobile-break-point="960"
     >
       <v-list-item link to="/">
         <v-list-item-content>

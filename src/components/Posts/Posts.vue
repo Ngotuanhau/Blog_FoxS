@@ -6,7 +6,7 @@
           <v-flex
             d-flex
             xs12
-            sm6
+            sm12
             md6
             v-for="(item, index) in props.items"
             :key="index"
