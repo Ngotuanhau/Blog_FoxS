@@ -94,6 +94,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../styles/main.scss";
+
 .c-page {
   display: block;
 }
@@ -107,7 +109,7 @@ export default {
   text-align: left;
   margin: 20px 0;
   font-size: 15px;
-  color: #ef5350;
+  color: $cl-date;
 }
 
 .c-page-content {
@@ -115,7 +117,7 @@ export default {
 }
 
 .c-text-post {
-  color: black;
+  color: $cl-text;
   text-align: left;
 }
 
@@ -123,7 +125,7 @@ export default {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: rgb(255, 255, 255, 0.6);
+  background-color: $cl-bg-title-posts;
 }
 
 .c-img {

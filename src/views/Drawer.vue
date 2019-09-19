@@ -105,7 +105,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
+@import "../styles/main.scss";
+
 .c-logo {
   font-weight: 700 !important;
   display: flex;
@@ -132,10 +134,10 @@ export default {
   margin-right: 6px;
 }
 .c-author {
-  color: red;
+  color: $cl-text-author;
 }
 .c-text-auth {
   text-decoration: none;
-  color: black !important;
+  color: $cl-text !important;
 }
 </style>

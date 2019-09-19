@@ -74,7 +74,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@import "../../styles/main.scss";
+
 .c-card {
   max-width: 100%;
 }
@@ -86,7 +88,7 @@ export default {
 
 .c-card-text {
   text-decoration: none;
-  color: black;
+  color: $cl-text;
   font-size: 20px;
   letter-spacing: 2px;
 }
@@ -97,14 +99,14 @@ export default {
 }
 
 .c-text-descrip {
-  color: rgba(0, 0, 0, 0.7);
+  color: $cl-text-description;
   font-size: 15px;
   height: 50px;
 }
 
 .c-btn-read {
-  background-color: #ef5350;
-  color: white;
+  background-color: $cl-bg-btn;
+  color: $cl-text-btn;
   border-radius: 20px;
   padding: 0 15px !important;
   position: absolute;

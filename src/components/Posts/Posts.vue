@@ -53,9 +53,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@import "../../styles/main.scss";
+
 .c-text-post {
-  color: black;
+  color: $cl-text;
   text-align: left;
   word-break: initial;
 }
@@ -64,7 +66,7 @@ export default {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: rgb(255, 255, 255, 0.6);
+  background-color: $cl-bg-title-posts;
 }
 
 .c-img {
