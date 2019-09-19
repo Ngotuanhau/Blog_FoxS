@@ -2,22 +2,28 @@
   <v-container fluid>
     <v-layout v-for="(item, index) in pages" :key="index" pa-2>
       <v-card class="c-card">
-        <v-row class="py-4 pl-4">
-          <v-col cols="6" class="shrink py-0">
+        <v-row class="pa-3" no-gutters>
+          <v-col cols="12" md="6" sm="6" class="shrink py-0">
             <router-link :to="'/page/'+ item.slug">
               <v-img :src="item.metadata.image.url" aspect-ratio="1.75"></v-img>
             </router-link>
           </v-col>
-          <v-col cols="6">
-            <v-container class="pa-0">
-              <v-row>
+          <v-col cols="12" md="6" sm="6">
+            <v-container class="pa-2">
+              <v-row no-gutters>
                 <v-col class="py-0">
                   <v-card-title class="c-card-title px-2">
                     <div style="width: 100%">
-                      <router-link :to="'/page/'+ item.slug" class="c-card-text">{{item.title}}</router-link>
+                      <router-link
+                        :to="'/page/'+ item.slug"
+                        class="c-card-text title"
+                      >{{item.title}}</router-link>
                     </div>
-                    <span class="c-text-date">{{item.created_at | moment("calendar") }}</span>
-                    <span v-html="item.metadata.description" class="c-text-descrip text-truncate"></span>
+                    <span class="c-text-date subtitle-2">{{item.created_at | moment("calendar") }}</span>
+                    <span
+                      v-html="item.metadata.description"
+                      class="c-text-descrip text-truncate subtitle-2"
+                    ></span>
                   </v-card-title>
                   <v-card-actions>
                     <v-btn text class="c-btn-read" :to="'/page/'+ item.slug">
