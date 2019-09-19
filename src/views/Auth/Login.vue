@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex class="c-form-login" xs6 md6 offset-md3 offset-xs3 pa-5>
+      <v-flex class="c-form-login" xs10 md8 offset-md2 offset-xs1 pa-5>
         <div class="c-text-header display-2 mb-8">
           <span class="first">My</span>
           <span class="second">Accound</span>
