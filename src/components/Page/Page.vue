@@ -1,13 +1,13 @@
 <template>
   <v-container fluid>
     <v-layout v-if="page" class="c-page">
-      <v-flex class="c-page-title">
+      <v-flex class="title font-weight-medium">
         <span>{{page.title}}</span>
       </v-flex>
       <v-flex class="c-page-date">
         <span>{{page.created_at | moment("calendar") }}</span>
       </v-flex>
-      <v-flex class="c-page-content">
+      <v-flex class="c-page-content body-1">
         <div>
           <span v-html="page.content"></span>
         </div>
@@ -100,15 +100,9 @@ export default {
   display: block;
 }
 
-.c-page-title {
-  font-size: 25px;
-  font-weight: 500;
-}
-
 .c-page-date {
   text-align: left;
   margin: 20px 0;
-  font-size: 15px;
   color: $cl-date;
 }
 
