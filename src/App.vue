@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer :categories="categories" v-model="drawer"></v-navigation-drawer>
-    <v-app-bar @toogle="drawer=!drawer" v-if="$vuetify.breakpoint.xs"></v-app-bar>
+    <v-app-bar @toogle="drawer=!drawer" v-if="$vuetify.breakpoint.smAndDown"></v-app-bar>
     <v-content>
       <v-container fluid>
         <Snackbar />
