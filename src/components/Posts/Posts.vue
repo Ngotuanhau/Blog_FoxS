@@ -18,9 +18,6 @@
                   <v-card-title class="c-title-post">
                     <span class="overline c-text-post">{{item.title}}</span>
                   </v-card-title>
-                  <v-card-title class="c-title-post">
-                    <span class="overline c-text-post">{{item.title}}</span>
-                  </v-card-title>
                 </v-img>
               </router-link>
             </v-card>
@@ -60,13 +57,16 @@ export default {
 .c-text-post {
   color: black;
   text-align: left;
+  word-break: initial;
 }
+
 .c-title-post {
   width: 100%;
   position: absolute;
   bottom: 0;
   background-color: rgb(255, 255, 255, 0.6);
 }
+
 .c-img {
   border-radius: 5px;
 }
