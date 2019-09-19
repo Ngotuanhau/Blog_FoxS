@@ -120,6 +120,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../styles/main.scss";
+
 .c-form-login {
   width: 100%;
   display: block;
@@ -138,11 +140,11 @@ export default {
 
 .c-btn-login {
   width: 100%;
-  background-color: #f44336;
+  background-color: $cl-bg-login;
 }
 
 .c-btn-login-text {
-  color: #fff;
+  color: $cl-text-btn;
 }
 
 .c-btn-create {
@@ -152,7 +154,7 @@ export default {
 
 .c-tran-forgot,
 .c-tran-create {
-  color: rgba(0, 0, 0, 0.5);
+  color: $cl-text-login;
   text-decoration: none;
 }
 
@@ -164,7 +166,7 @@ export default {
 
 .animated a {
   padding: 0.3em 0;
-  color: rgba(0, 0, 0, 0.5);
+  color: $cl-text-login;
   position: relative;
   text-decoration: none;
   display: inline-block;
@@ -176,7 +178,7 @@ export default {
   content: "";
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
-  background-color: #f44336;
+  background-color: $cl-text-author;
   width: 0;
   bottom: 0;
   left: 0;
@@ -184,7 +186,7 @@ export default {
 
 .animated a:hover,
 .animated .current a {
-  color: #f44336;
+  color: $cl-text-author;
 }
 
 .animated a:hover:after,
