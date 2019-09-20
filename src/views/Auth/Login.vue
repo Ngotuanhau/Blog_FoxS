@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex class="c-form-login" xs10 md8 offset-md2 offset-xs1 pa-5>
+      <v-flex xs10 md8 offset-md2 offset-xs1 pa-5>
         <div class="c-text-header display-2 mb-8">
           <span class="first">My</span>
           <span class="second">Accound</span>
@@ -22,14 +22,14 @@
               <li>
                 <router-link
                   to="/reset_pass"
-                  class="c-tran-forgot font-weight-regular font-italic"
+                  class="c-forgot font-weight-regular font-italic"
                 >Forgot your password !</router-link>
               </li>
             </span>
 
-            <v-flex class="c-button">
+            <v-flex class="c-btn">
               <v-btn
-                class="c-btn c-btn-login"
+                class="c-btn-login"
                 text
                 @click.prevent="submit"
                 :disabled="invalid || !validated"
@@ -40,10 +40,10 @@
           </v-form>
         </ValidationObserver>
 
-        <span class="animated c-btn-create">
+        <span class="animated">
           <li>
             <router-link
-              class="c-tran-create font-weight-regular font-italic"
+              class="c-create font-weight-regular font-italic"
               to="/sign_up"
             >Create An Acount!</router-link>
           </li>
@@ -122,38 +122,26 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/main.scss";
 
-.c-form-login {
-  width: 100%;
-  display: block;
-}
-
 .c-text-header {
-  justify-content: center;
   display: flex;
+  justify-content: center;
 }
 
-.c-button {
-  justify-content: center;
-  display: flex;
+.c-btn {
   margin: 20px 0;
+
+  .c-btn-login {
+    width: 100%;
+    background-color: $cl-bg-login;
+
+    .c-btn-login-text {
+      color: $cl-text-btn;
+    }
+  }
 }
 
-.c-btn-login {
-  width: 100%;
-  background-color: $cl-bg-login;
-}
-
-.c-btn-login-text {
-  color: $cl-text-btn;
-}
-
-.c-btn-create {
-  display: flex;
-  justify-content: center;
-}
-
-.c-tran-forgot,
-.c-tran-create {
+.c-forgot,
+.c-create {
   color: $cl-text-login;
   text-decoration: none;
 }
