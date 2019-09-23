@@ -1,25 +1,60 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+/* eslint-disable */
 
-Vue.use(Router)
+import Vue from "vue";
+import Router from "vue-router";
 
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+import Home from "./views/Home.vue";
+import Login from "./views/Auth/Login";
+import Pages from "./views/Pages/ContainerPages";
+import Page from "./views/Page/ContainerPage";
+
+Vue.use(Router);
+
+let router = new Router({
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: [{
+            path: "/login",
+            name: "login",
+            component: Login
+        },
+        {
+            path: "/",
+            component: {
+                render: h => h("router-view")
+            },
+            children: [{
+                    path: "/",
+                    name: "home",
+                    component: Home
+                },
+                {
+                    path: "/pages/:slug",
+                    name: "pages",
+                    component: Pages
+                },
+                {
+                    path: "/page/:slug",
+                    name: "page",
+                    component: Page
+                }
+            ]
+        }
+    ]
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.isAuthenticated) {
+            return next({
+                path: "/",
+                params: {
+                    nextUrl: to.fullPath
+                }
+            });
+        }
     }
-  ]
-})
+    return next();
+});
+
+export default router;
