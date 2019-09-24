@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 module.exports = {
-    publicPath: "/Blog_FoxS/"
+    publicPath: process.env.NODE_ENV === "production" ? "/Blog_FoxS/" : "/"
 };
