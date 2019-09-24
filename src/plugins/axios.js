@@ -5,8 +5,7 @@ import VueCookies from "vue-cookies";
 export default {
     install(Vue, options) {
         window.axios = axios;
-        axios.defaults.baseURL =
-            "https://api.cosmicjs.com/v1/7537c940-d2b3-11e9-a438-415a35e01047/";
+        axios.defaults.baseURL = "https://api.cosmicjs.com/v1/blogfoxs/";
         axios.interceptors.request.use(
             config => {
                 const token = VueCookies.get("token");
