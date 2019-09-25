@@ -93,36 +93,41 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "../../styles/main.scss";
 
 .c-page {
   display: block;
-}
 
-.c-page-date {
-  text-align: left;
-  margin: 20px 0;
-  color: $cl-date;
-}
+  .c-page-date {
+    text-align: left;
+    margin: 20px 0;
+    color: $cl-date;
+  }
 
-.c-page-content {
-  text-align: left;
-}
+  .c-page-content {
+    text-align: left;
 
-.c-text-post {
-  color: $cl-text;
-  text-align: left;
-}
-
-.c-title-post {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  background-color: $cl-bg-title-posts;
+    img {
+      max-width: 100%;
+      max-height: 350px;
+    }
+  }
 }
 
 .c-img {
   border-radius: 5px;
+
+  .c-title-post {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: $cl-bg-title-posts;
+
+    .c-text-post {
+      color: $cl-text;
+      text-align: left;
+    }
+  }
 }
 </style>
