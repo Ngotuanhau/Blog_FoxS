@@ -1,9 +1,9 @@
 <template>
-  <v-app-bar>
+  <v-app-bar max-width="100%" app hide-on-scroll>
     <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="$emit('toogle')"></v-app-bar-nav-icon>
-    <v-toolbar-title>
+    <v-toolbar-title class="c-toolbar-title">
       <router-link class="c-text" to="/">
-        <span class="font-weight-regular display-1 font-italic px-4">FOXS</span>
+        <span class="font-weight-medium display-2 pr-4">FOXS</span>
       </router-link>
     </v-toolbar-title>
   </v-app-bar>
@@ -13,5 +13,16 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "../styles/main.scss";
+
+.c-toolbar-title {
+  margin: auto;
+  padding-left: 0 !important;
+
+  .c-text {
+    text-decoration: none;
+    color: $cl-text;
+  }
+}
 </style>
