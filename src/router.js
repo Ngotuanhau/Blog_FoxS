@@ -40,7 +40,20 @@ let router = new Router({
                 }
             ]
         }
-    ]
+    ],
+
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+            if (to.hash) {
+                return {
+                    selector: to.hash
+                };
+            }
+            setTimeout(() => {
+                resolve({ x: 0, y: 0 });
+            }, 500);
+        });
+    }
 });
 
 router.beforeEach((to, from, next) => {
