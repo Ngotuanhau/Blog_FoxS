@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar max-width="100%" app hide-on-scroll>
+  <v-app-bar app>
     <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="$emit('toogle')"></v-app-bar-nav-icon>
     <v-toolbar-title class="c-toolbar-title">
       <router-link class="c-text" to="/">
