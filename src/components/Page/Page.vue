@@ -1,13 +1,13 @@
 <template>
   <v-container fluid>
-    <v-layout v-if="page" class="c-page">
-      <v-flex class="title font-weight-medium">
+    <v-layout v-if="page" class="page">
+      <v-flex class="page-title">
         <span>{{page.title}}</span>
       </v-flex>
-      <v-flex class="c-page-date">
-        <span>{{page.created_at | moment("calendar") }}</span>
+      <v-flex class="page-date">
+        <span>{{page.created_at | moment("from", "now") }}</span>
       </v-flex>
-      <v-flex class="c-page-content body-1">
+      <v-flex class="page-content body-1">
         <div>
           <span v-html="page.content"></span>
         </div>
@@ -17,8 +17,8 @@
       </v-flex>
     </v-layout>
     <v-layout column mt-5>
-      <v-flex>
-        <span class="title c-related">Related posts</span>
+      <v-flex class="page-related">
+        <span class="page-related__title">Bài viết liên quan</span>
       </v-flex>
       <v-container fluid grid-list-md>
         <v-data-iterator
@@ -29,11 +29,16 @@
           <template v-slot:default="props">
             <v-layout wrap>
               <v-flex xs12 sm6 md4 v-for="(item, index) in props.items" :key="index">
-                <v-card width="100%" class="c-card">
+                <v-card width="100%" class="card">
                   <router-link :to="'/page/'+ item.slug">
-                    <v-img :src="item.metadata.image.url" alt="hinhanh" height="300" class="c-img">
-                      <v-card-title class="c-title-post">
-                        <span class="overline c-text-post">{{item.title}}</span>
+                    <v-img
+                      :src="item.metadata.image.url"
+                      alt="hinhanh"
+                      height="300"
+                      class="card-img"
+                    >
+                      <v-card-title class="card-title">
+                        <span class="overline card-title__text">{{item.title}}</span>
                       </v-card-title>
                     </v-img>
                   </router-link>
@@ -96,16 +101,23 @@ export default {
 <style lang="scss" >
 @import "../../styles/main.scss";
 
-.c-page {
+.page {
   display: block;
+  font-family: Arial, Helvetica, sans-serif;
 
-  .c-page-date {
+  .page-title {
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .page-date {
     text-align: left;
     margin: 20px 0;
     color: $cl-date;
   }
 
-  .c-page-content {
+  .page-content {
     text-align: left;
 
     img {
@@ -115,19 +127,42 @@ export default {
   }
 }
 
-.c-img {
+.page-related {
+  display: flex;
+  border-bottom: 2px solid $cl-main;
+  font-family: Arial, Helvetica, sans-serif;
+
+  .page-related__title {
+    background-color: $cl-main;
+    color: $cl-text-main;
+    padding: 3px 5px;
+  }
+}
+
+.card-img {
   border-radius: 5px;
 
-  .c-title-post {
+  .card-title {
     width: 100%;
     position: absolute;
     bottom: 0;
     background-color: $cl-bg-title-posts;
 
-    .c-text-post {
+    .card-title__text {
       color: $cl-text;
       text-align: left;
+      word-break: initial;
     }
   }
 }
+
+.v-data-footer__pagination {
+  display: none;
+}
+
+.v-select {
+  margin: 13px 0 13px 20px !important;
+}
 </style>
+
+
