@@ -2,9 +2,9 @@
   <v-container>
     <v-layout>
       <v-flex xs10 md8 offset-md2 offset-xs1 pa-5>
-        <div class="c-text-header display-2 mb-8">
-          <span class="first">My</span>
-          <span class="second">Accound</span>
+        <div class="login-header display-2 mb-8">
+          <span class="login-header__first">My</span>
+          <span class="login-header__second">Accound</span>
         </div>
         <ValidationObserver ref="observer">
           <v-form slot-scope="{ invalid, validated }">
@@ -18,32 +18,32 @@
               :type="show ? 'text' : 'password'"
             />
 
-            <span class="animated">
+            <span class="login-animated">
               <li>
                 <router-link
                   to="/reset_pass"
-                  class="c-forgot font-weight-regular font-italic"
+                  class="login-forgot font-weight-regular font-italic"
                 >Forgot your password !</router-link>
               </li>
             </span>
 
-            <v-flex class="c-btn">
+            <v-flex class="login-btn">
               <v-btn
-                class="c-btn-login"
+                class="login-btn__signin"
                 text
                 @click.prevent="submit"
                 :disabled="invalid || !validated"
               >
-                <span class="c-btn-login-text">Sign In</span>
+                <span class="login-btn__signin--text">Sign In</span>
               </v-btn>
             </v-flex>
           </v-form>
         </ValidationObserver>
 
-        <span class="animated">
+        <span class="login-animated">
           <li>
             <router-link
-              class="c-create font-weight-regular font-italic"
+              class="login-signup font-weight-regular font-italic"
               to="/sign_up"
             >Create An Acount!</router-link>
           </li>
@@ -79,14 +79,14 @@ export default {
   methods: {
     animate() {
       anime({
-        targets: ".first",
+        targets: ".login-header__first",
         translateX: [-200, 0],
         duration: 1000,
         delay: 800,
         easing: "linear"
       });
       anime({
-        targets: ".second",
+        targets: ".login-header__second",
         translateY: [-200, 0],
         duration: 500,
         delay: 800,
@@ -122,45 +122,47 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/main.scss";
 
-.c-text-header {
+.login-header {
   display: flex;
   justify-content: center;
 }
 
-.c-btn {
+.login-btn {
   margin: 20px 0;
 
-  .c-btn-login {
+  .login-btn__signin {
     width: 100%;
     background-color: $cl-bg-login;
 
-    .c-btn-login-text {
+    .login-btn__signin--text {
       color: $cl-text-btn;
     }
   }
 }
 
-.c-forgot,
-.c-create {
-  color: $cl-text-login;
-  text-decoration: none;
+.login-animated {
+  .login-forgot,
+  .login-signup {
+    color: $cl-text-login;
+    text-decoration: none;
+  }
+
+  li {
+    display: inline-block;
+    list-style: outside none;
+    padding: 0;
+
+    a {
+      padding: 0.3em 0;
+      color: $cl-text-login;
+      position: relative;
+      text-decoration: none;
+      display: inline-block;
+    }
+  }
 }
 
-.animated li {
-  display: inline-block;
-  list-style: outside none none;
-  padding: 0;
-}
-
-.animated a {
-  padding: 0.3em 0;
-  color: $cl-text-login;
-  position: relative;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.animated a:after {
+.login-animated a:after {
   height: 2px;
   position: absolute;
   content: "";
@@ -172,13 +174,13 @@ export default {
   left: 0;
 }
 
-.animated a:hover,
-.animated .current a {
+.login-animated a:hover,
+.login-animated .current a {
   color: $cl-text-author;
 }
 
-.animated a:hover:after,
-.animated .current a:after {
+.login-animated a:hover:after,
+.login-animated .current a:after {
   width: 100%;
 }
 </style>
