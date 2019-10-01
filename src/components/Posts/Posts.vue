@@ -12,11 +12,11 @@
             :key="index"
             class="pa-2"
           >
-            <v-card width="100%" class="c-card">
+            <v-card width="100%" class="card">
               <router-link :to="'/page/'+ item.slug">
-                <v-img :src="item.metadata.image.url" alt="hinhanh" height="300" class="c-img">
-                  <v-card-title class="c-title-post">
-                    <span class="overline c-text-post">{{item.title}}</span>
+                <v-img :src="item.metadata.image.url" alt="hinhanh" height="300" class="card-img">
+                  <v-card-title class="card-title">
+                    <span class="overline card-title__text">{{item.title}}</span>
                   </v-card-title>
                 </v-img>
               </router-link>
@@ -56,20 +56,20 @@ export default {
 <style lang='scss' scoped>
 @import "../../styles/main.scss";
 
-.c-text-post {
-  color: $cl-text;
-  text-align: left;
-  word-break: initial;
-}
-
-.c-title-post {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  background-color: $cl-bg-title-posts;
-}
-
-.c-img {
+.card-img {
   border-radius: 5px;
+
+  .card-title {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: $cl-bg-title-posts;
+
+    .card-title__text {
+      text-align: left;
+      word-break: initial;
+      color: $cl-text;
+    }
+  }
 }
 </style>
