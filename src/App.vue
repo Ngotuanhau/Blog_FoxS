@@ -33,6 +33,7 @@ import NavigationDrawer from "./views/Drawer";
 import AppBar from "./views/Toolbar";
 import Snackbar from "./components/Snackbar/Snackbar";
 import GoTop from "@inotom/vue-go-top";
+import gql from "graphql-tag";
 
 export default {
   name: "App",
@@ -57,20 +58,25 @@ export default {
     };
   },
 
-  mounted() {
-    this.getCategories();
+  apollo: {
+    categories: gql`
+      query {
+        categories {
+          id
+          name
+          slug
+        }
+      }
+    `
+  },
+
+  watch: {
+    categories(newVal) {
+      console.log(newVal);
+    }
   },
 
   methods: {
-    getCategories() {
-      axios.get("/object-types").then(response => {
-        this.categories = response.data.object_types.filter(
-          item => item.slug !== "authors"
-        );
-        console.log(this.categories);
-      });
-    },
-
     showSnackbar(message, timeout = 3000, yPos = "top", xPos, mode) {
       this.message = message;
       this.timeout = timeout;

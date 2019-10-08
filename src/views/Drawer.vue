@@ -27,13 +27,13 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item
-          v-for="(item, index) in categories"
-          :key="index"
+          v-for="item in categories"
+          :key="item.id"
           link
-          :to="{name:'pages', params:{slug:item.slug}}"
+          :to="{name:'categories', params:{id:item.id}}"
         >
           <v-list-item-content>
-            <v-list-item-title class="menu-text">{{item.title}}</v-list-item-title>
+            <v-list-item-title class="menu-text">{{item.name}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
