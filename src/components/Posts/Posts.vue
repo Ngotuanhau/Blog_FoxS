@@ -3,20 +3,17 @@
     <v-data-iterator :items="posts">
       <template v-slot:default="props">
         <v-layout wrap>
-          <v-flex
-            d-flex
-            xs12
-            sm12
-            md6
-            v-for="(item, index) in props.items"
-            :key="index"
-            class="pa-2"
-          >
+          <v-flex d-flex xs12 sm12 md6 v-for="item in props.items" :key="item.id" class="pa-2">
             <v-card width="100%" class="card">
-              <router-link :to="'/page/'+ item.slug">
-                <v-img :src="item.metadata.image.url" alt="hinhanh" height="300" class="card-img">
+              <router-link :to="'/page/'+ item.id">
+                <v-img
+                  :src="'http://localhost:1337' + item.image[0].url"
+                  alt="hinhanh"
+                  height="300"
+                  class="card-img"
+                >
                   <v-card-title class="card-title">
-                    <span class="overline card-title__text">{{item.title}}</span>
+                    <span class="overline card-title__text">{{item.name}}</span>
                   </v-card-title>
                 </v-img>
               </router-link>
@@ -29,26 +26,31 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
+
 export default {
-  data() {
-    return {
-      posts: []
-    };
-  },
-
-  mounted() {
-    this.getPosts();
-  },
-
-  methods: {
-    getPosts() {
-      axios.get("/objects").then(response => {
-        this.posts = response.data.objects.filter(
-          item => item.type_slug !== "authors"
-        );
-        console.log(this.posts);
-      });
+  watch: {
+    posts(val) {
+      console.log(val);
     }
+  },
+
+  apollo: {
+    posts: gql`
+      query {
+        posts(sort: "created_at:desc") {
+          id
+          name
+          slug
+          categories {
+            name
+          }
+          image {
+            url
+          }
+        }
+      }
+    `
   }
 };
 </script>
