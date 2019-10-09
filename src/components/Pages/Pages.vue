@@ -1,11 +1,15 @@
 <template>
   <v-container fluid>
-    <v-layout v-for="(item, index) in pages" :key="index" pa-2>
+    <v-layout v-for="item in category.posts" :key="item.id" pa-2>
       <v-card class="card">
         <v-row class="pa-3" no-gutters>
           <v-col cols="12" md="6" sm="6" class="shrink py-0">
-            <router-link :to="'/page/'+ item.slug">
-              <v-img :src="item.metadata.image.url" aspect-ratio="1.75" class="card-img"></v-img>
+            <router-link :to="{name:'page', params:{id:item.id}}">
+              <v-img
+                :src="'http://localhost:1337' + item.image[0].url"
+                aspect-ratio="1.75"
+                class="card-img"
+              ></v-img>
             </router-link>
           </v-col>
           <v-col cols="12" md="6" sm="6">
@@ -14,18 +18,18 @@
                 <v-col class="py-0">
                   <v-card-title class="card-title px-2">
                     <div style="width: 100%">
-                      <router-link :to="'/page/'+ item.slug" class="card-title__text">{{item.title}}</router-link>
+                      <router-link
+                        :to="{name:'page', params:{id:item.id}}"
+                        class="card-title__text"
+                      >{{item.name}}</router-link>
                     </div>
                     <span
                       class="card-title__date subtitle-2"
                     >{{item.created_at | moment("from", "now") }}</span>
-                    <span
-                      v-html="item.metadata.description"
-                      class="card-title__descrip text-truncate subtitle-2"
-                    ></span>
+                    <span v-html="item.title" class="card-title__descrip text-truncate subtitle-2"></span>
                   </v-card-title>
                   <v-card-actions class="card-actions">
-                    <v-btn text class="card-actions__read" :to="'/page/'+ item.slug">
+                    <v-btn text class="card-actions__read" :to="{name:'page', params:{id:item.id}}">
                       <span>read more</span>
                     </v-btn>
                   </v-card-actions>
@@ -41,31 +45,49 @@
 
 <script>
 import moment from "vue-moment";
+import gql from "graphql-tag";
+
 export default {
   data() {
     return {
-      pages: []
+      category: ""
     };
   },
 
   watch: {
-    $route(val) {
-      this.getPages();
+    category(val) {
+      console.log(val);
     }
   },
 
-  mounted() {
-    this.getPages();
+  apollo: {
+    category: {
+      query: gql`
+        query category($id: ID!) {
+          category(id: $id) {
+            name
+            posts(sort: "created_at:desc") {
+              id
+              name
+              title
+              slug
+              created_at
+              image {
+                url
+              }
+            }
+          }
+        }
+      `,
+      variables() {
+        return {
+          id: this.$route.params.id
+        };
+      }
+    }
   },
 
   methods: {
-    getPages() {
-      axios.get(`/objects?type=${this.$route.params.slug}`).then(response => {
-        this.pages = response.data.objects;
-        console.log(this.pages);
-      });
-    },
-
     getDate() {
       return moment();
     }
