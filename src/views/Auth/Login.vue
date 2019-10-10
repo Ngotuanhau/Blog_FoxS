@@ -96,24 +96,30 @@ export default {
 
     submit() {
       const user = {
-        email: this.email,
+        identifier: this.email,
         password: this.password
       };
       this.$store
         .dispatch("login", user)
         .then(() => this.$router.push("/"))
-        .catch(error =>
+        .catch(error => {
+          let errors = error.response.data.message
+            .reduce((items, val) => {
+              items.push(val.messages);
+              return items;
+            }, [])
+            .flat();
           this.$store.commit(
             "showSnackbar",
             {
-              message: error.response.data.message,
+              message: errors[0].message,
               timeout: 4000,
               multiline: false,
               type: "error"
             },
             { module: "Snackbar" }
-          )
-        );
+          );
+        });
     }
   }
 };
