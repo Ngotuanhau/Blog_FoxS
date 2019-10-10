@@ -114,25 +114,29 @@ export default {
   animation: coming 1s;
   animation-delay: 0.5s;
   opacity: 0;
+  position: absolute;
+  transition: all 0.3s ease;
 }
 
 .router-animate-leave-active {
   animation: going 1s;
+  position: absolute;
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 @keyframes going {
   from {
-    transform: translateX(0);
+    transform: translateX();
   }
   to {
-    transform: translateX(-50px);
+    transform: translateX(-300px);
     opacity: 0;
   }
 }
 
 @keyframes coming {
   from {
-    transform: translateX(-50px);
+    transform: translateX(-300px);
     opacity: 0;
   }
   to {
