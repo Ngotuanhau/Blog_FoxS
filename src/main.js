@@ -9,6 +9,7 @@ import vuetify from "./plugins/vuetify";
 import axios from "./plugins/axios";
 import "./vee-validate";
 import VueMoment from "vue-moment";
+import { createProvider } from "./vue-apollo";
 
 Vue.use(VueMoment);
 Vue.use(axios);
@@ -19,5 +20,6 @@ new Vue({
     router,
     store,
     vuetify,
+    apolloProvider: createProvider(),
     render: h => h(App)
 }).$mount("#app");

@@ -3,11 +3,12 @@
     <v-layout>
       <v-flex xs10 md8 offset-md2 offset-xs1 pa-5>
         <div class="c-text-header display-2 mb-8">
-          <span class="first">My</span>
-          <span class="second">Accound</span>
+          <span class="first">Register Accound</span>
         </div>
+        <!-- Form validate -->
         <ValidationObserver ref="observer">
           <v-form slot-scope="{ invalid, validated }">
+            <VTextFieldWithValidation rules="required" v-model="username" label="User name" />
             <VTextFieldWithValidation rules="required|email" v-model="email" label="E-mail" />
             <VTextFieldWithValidation
               rules="required|min:6"
@@ -17,7 +18,6 @@
               @click:append="show = !show"
               :type="show ? 'text' : 'password'"
             />
-
             <span class="animated">
               <li>
                 <router-link
@@ -26,7 +26,6 @@
                 >Forgot your password !</router-link>
               </li>
             </span>
-
             <v-flex class="c-btn">
               <v-btn
                 class="c-btn-login"
@@ -34,18 +33,15 @@
                 @click.prevent="submit"
                 :disabled="invalid || !validated"
               >
-                <span class="c-btn-login-text">Sign In</span>
+                <span class="c-btn-login-text">Sign up</span>
               </v-btn>
             </v-flex>
           </v-form>
         </ValidationObserver>
-
+        <!-- Form validate -->
         <span class="animated">
           <li>
-            <router-link
-              class="c-create font-weight-regular font-italic"
-              to="/sign_up"
-            >Create An Acount!</router-link>
+            <router-link class="c-create font-weight-regular font-italic" to="/login">Go back Login</router-link>
           </li>
         </span>
       </v-flex>
@@ -56,7 +52,6 @@
 <script>
 import { ValidationObserver } from "vee-validate";
 import VTextFieldWithValidation from "../../components/input/VTextFieldWithValidation";
-import anime from "animejs";
 
 export default {
   components: {
@@ -64,44 +59,40 @@ export default {
     VTextFieldWithValidation
   },
 
+  props: ["message"],
+
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       show: false
     };
   },
 
-  mounted() {
-    this.animate();
-  },
-
   methods: {
-    animate() {
-      anime({
-        targets: ".first",
-        translateX: [-200, 0],
-        duration: 1000,
-        delay: 800,
-        easing: "linear"
-      });
-      anime({
-        targets: ".second",
-        translateY: [-200, 0],
-        duration: 500,
-        delay: 800,
-        easing: "linear"
-      });
-    },
-
     submit() {
       const user = {
-        identifier: this.email,
+        username: this.username,
+        email: this.email,
         password: this.password
       };
-      this.$store
-        .dispatch("login", user)
-        .then(() => this.$router.push("/"))
+      axios
+        .post("/auth/local/register", user)
+        .then(response => {
+          console.log(response);
+          this.$store.commit(
+            "showSnackbar",
+            {
+              message: "Login Successful!",
+              timeout: 3000,
+              multiline: false,
+              type: "success"
+            },
+            { module: "Snackbar" }
+          );
+          this.$router.push("/login");
+        })
         .catch(error => {
           let errors = error.response.data.message
             .reduce((items, val) => {
@@ -113,12 +104,13 @@ export default {
             "showSnackbar",
             {
               message: errors[0].message,
-              timeout: 4000,
+              timeout: 3000,
               multiline: false,
               type: "error"
             },
             { module: "Snackbar" }
           );
+          return;
         });
     }
   }
@@ -147,7 +139,7 @@ export default {
 }
 
 .c-forgot,
-.c-create {
+.c-login {
   color: $cl-text-login;
   text-decoration: none;
 }
