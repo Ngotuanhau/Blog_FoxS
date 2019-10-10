@@ -4,9 +4,11 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Home from "./views/Home.vue";
-import Login from "./views/Auth/Login";
 import Categories from "./views/Pages/ContainerPages";
 import Page from "./views/Page/ContainerPage";
+
+import Login from "./views/Auth/Login";
+import SignUp from "./views/Auth/SignUp";
 
 Vue.use(Router);
 
@@ -17,6 +19,11 @@ let router = new Router({
             path: "/login",
             name: "login",
             component: Login
+        },
+        {
+            path: "/sign_up",
+            name: "sign_up",
+            component: SignUp
         },
         {
             path: "/",
