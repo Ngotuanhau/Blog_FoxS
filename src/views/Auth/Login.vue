@@ -2,9 +2,9 @@
   <v-container>
     <v-layout>
       <v-flex xs10 md8 offset-md2 offset-xs1 pa-5>
-        <div class="login-header display-2 mb-8">
-          <span class="login-header__first">My</span>
-          <span class="login-header__second">Accound</span>
+        <div class="c-text-header display-2 mb-8">
+          <span class="first">My</span>
+          <span class="second">Accound</span>
         </div>
         <ValidationObserver ref="observer">
           <v-form slot-scope="{ invalid, validated }">
@@ -18,32 +18,32 @@
               :type="show ? 'text' : 'password'"
             />
 
-            <span class="login-animated">
+            <span class="animated">
               <li>
                 <router-link
                   to="/reset_pass"
-                  class="login-forgot font-weight-regular font-italic"
+                  class="c-forgot font-weight-regular font-italic"
                 >Forgot your password !</router-link>
               </li>
             </span>
 
-            <v-flex class="login-btn">
+            <v-flex class="c-btn">
               <v-btn
-                class="login-btn__signin"
+                class="c-btn-login"
                 text
                 @click.prevent="submit"
                 :disabled="invalid || !validated"
               >
-                <span class="login-btn__signin--text">Sign In</span>
+                <span class="c-btn-login-text">Sign In</span>
               </v-btn>
             </v-flex>
           </v-form>
         </ValidationObserver>
 
-        <span class="login-animated">
+        <span class="animated">
           <li>
             <router-link
-              class="login-signup font-weight-regular font-italic"
+              class="c-create font-weight-regular font-italic"
               to="/sign_up"
             >Create An Acount!</router-link>
           </li>
@@ -79,14 +79,14 @@ export default {
   methods: {
     animate() {
       anime({
-        targets: ".login-header__first",
+        targets: ".first",
         translateX: [-200, 0],
         duration: 1000,
         delay: 800,
         easing: "linear"
       });
       anime({
-        targets: ".login-header__second",
+        targets: ".second",
         translateY: [-200, 0],
         duration: 500,
         delay: 800,
@@ -96,24 +96,30 @@ export default {
 
     submit() {
       const user = {
-        email: this.email,
+        identifier: this.email,
         password: this.password
       };
       this.$store
         .dispatch("login", user)
         .then(() => this.$router.push("/"))
-        .catch(error =>
+        .catch(error => {
+          let errors = error.response.data.message
+            .reduce((items, val) => {
+              items.push(val.messages);
+              return items;
+            }, [])
+            .flat();
           this.$store.commit(
             "showSnackbar",
             {
-              message: error.response.data.message,
+              message: errors[0].message,
               timeout: 4000,
               multiline: false,
               type: "error"
             },
             { module: "Snackbar" }
-          )
-        );
+          );
+        });
     }
   }
 };
@@ -122,47 +128,45 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/main.scss";
 
-.login-header {
+.c-text-header {
   display: flex;
   justify-content: center;
 }
 
-.login-btn {
+.c-btn {
   margin: 20px 0;
 
-  .login-btn__signin {
+  .c-btn-login {
     width: 100%;
     background-color: $cl-bg-login;
 
-    .login-btn__signin--text {
+    .c-btn-login-text {
       color: $cl-text-btn;
     }
   }
 }
 
-.login-animated {
-  .login-forgot,
-  .login-signup {
-    color: $cl-text-login;
-    text-decoration: none;
-  }
-
-  li {
-    display: inline-block;
-    list-style: outside none;
-    padding: 0;
-
-    a {
-      padding: 0.3em 0;
-      color: $cl-text-login;
-      position: relative;
-      text-decoration: none;
-      display: inline-block;
-    }
-  }
+.c-forgot,
+.c-create {
+  color: $cl-text-login;
+  text-decoration: none;
 }
 
-.login-animated a:after {
+.animated li {
+  display: inline-block;
+  list-style: outside none none;
+  padding: 0;
+}
+
+.animated a {
+  padding: 0.3em 0;
+  color: $cl-text-login;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.animated a:after {
   height: 2px;
   position: absolute;
   content: "";
@@ -174,13 +178,13 @@ export default {
   left: 0;
 }
 
-.login-animated a:hover,
-.login-animated .current a {
+.animated a:hover,
+.animated .current a {
   color: $cl-text-author;
 }
 
-.login-animated a:hover:after,
-.login-animated .current a:after {
+.animated a:hover:after,
+.animated .current a:after {
   width: 100%;
 }
 </style>

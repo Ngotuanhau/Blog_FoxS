@@ -14,9 +14,10 @@ const actions = {
     login({ commit }, user) {
         return new Promise((resolve, reject) => {
             axios
-                .post("https://api.cosmicjs.com/v1/authenticate", user)
+                .post("http://localhost:1337/auth/local", user)
                 .then(response => {
-                    const token = response.data.token;
+                    console.log(response);
+                    const token = response.data.jwt;
                     VueCookies.set("token", token);
                     commit("setToken", token);
                     resolve(response);
